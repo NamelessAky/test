@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Testing</title>
+    <link rel="stylesheet" href="object.css">
+</head>
+<body>
+
+
+    <div class="layer">
+        
+        <div class="background" layer-effect="0.0025">
+            <!-- Layer 1 for background image transition -->
+            <div class="background-layer background-layer-1"></div>
+            <!-- Layer 2 for background image transition -->
+            <div class="background-layer background-layer-2"></div>
+    
+            <div class="water">
+                <!-- Layer 1 for water image transition -->
+                <div class="water-layer water-layer-1"></div>
+                <!-- Layer 2 for water image transition -->
+                <div class="water-layer water-layer-2"></div>
+            </div>
+        </div>
+
+        <div class="reflect people" data-reflect-gap="-0.1" layer-effect="0.01"></div> 
+        <div class="reflect bird" data-reflect-gap="50"  layer-effect="0.03"></div> 
+
+    </div>
+    
+
+    <svg>
+        <filter id="turbulence" x="0" y="0" width="100%" height="100%">
+            <feTurbulence id="sea-filter" numOctaves="3" seed="2" baseFrequency="0.01 0.03"></feTurbulence>
+            <feDisplacementMap scale="8" in="SourceGraphic"></feDisplacementMap>
+            <animate xlink:href="#sea-filter" attributeName="baseFrequency" dur="10s"
+            keyTimes="0;0.5;1" values="0.01 0.03;0.015 0.04;0.01 0.03" repeatCount="indefinite"></animate>
+        </filter>
+    </svg>
+    
+</body>
+    
+
+    <script src="layer.js"></script>
+</body>
+</html>
