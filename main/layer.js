@@ -9,7 +9,7 @@ function addReflectionToDivs() {
         const gapHeight = div.getAttribute('data-reflect-gap') || 2; 
         reflectionDiv.style.marginTop = `${gapHeight}vh`; 
 
-        reflectionDiv.style.transform = 'scaleY(-1)'; 
+        reflectionDiv.style.transform = 'scaleY(-1) translate(-50%, -50%)'; 
 
         reflectionDiv.style.filter = 'url(#turbulence)';
 
@@ -29,31 +29,38 @@ document.addEventListener("mousemove", function(event) {
 
     elements.forEach(element => {
         const layerEffect = parseFloat(element.getAttribute('layer-effect')); // Get layer-effect value
-
-        // Calculate the mouse position relative to the layer
-        const mouseX = event.clientX - layerRect.left; // Mouse X position relative to the layer
-        const mouseY = event.clientY - layerRect.top;  // Mouse Y position relative to the layer
-
-        // Calculate the new position using vh units
-        const vhOffsetX = (mouseX / window.innerWidth) * 100 * layerEffect; // Convert to vh
-        const vhOffsetY = (mouseY / window.innerHeight) * 100 * layerEffect; // Convert to vh
-
-        // Get the current transform value
-        const currentTransform = window.getComputedStyle(element).transform;
-
-        // Determine if the element is flipped based on its transform
-        const isFlipped =
-            /matrix\s*\(\s*-1\s*,/.test(currentTransform) || 
-            /scaleY\s*\(\s*-1\s*\)/.test(currentTransform) || 
-            /matrix\s*\(\s*[\d\.\-]*,\s*[\d\.\-]*,\s*[\d\.\-]*,\s*-1\s*,/.test(currentTransform); 
-
-
-        // Move the object with layer effect, preserving flip state
-        if (isFlipped) {
-            element.style.transform = `translate(${vhOffsetX}vh, ${vhOffsetY}vh) scaleY(-1)`;
-        } else {
-            element.style.transform = `translate(${vhOffsetX}vh, ${vhOffsetY}vh)`;
-        }
+    
+        // Assuming the mouse event object is provided
+        document.addEventListener('mousemove', event => {
+            const layerRect = element.getBoundingClientRect(); // Get the element's position
+            const mouseX = event.clientX - layerRect.left; // Mouse X position relative to the layer
+            const mouseY = event.clientY - layerRect.top;  // Mouse Y position relative to the layer
+    
+            // Calculate the new position using vh units
+            const vhOffsetX = (mouseX / window.innerWidth) * 100 * layerEffect; // Convert to vh
+            const vhOffsetY = (mouseY / window.innerHeight) * 100 * layerEffect; // Convert to vh
+    
+            // Get the current transform value
+            const currentTransform = window.getComputedStyle(element).transform;
+    
+            // Determine if the element is flipped based on its transform
+            const isFlipped = 
+                /matrix\s*\(\s*-1\s*,/.test(currentTransform) || 
+                /scaleY\s*\(\s*-1\s*\)/.test(currentTransform) || 
+                /matrix\s*\(\s*[\d\.\-]*,\s*[\d\.\-]*,\s*[\d\.\-]*,\s*-1\s*,/.test(currentTransform);
+    
+            // Check if the element has the classes .background or .water
+            const hasBackgroundOrWaterClass = element.classList.contains('background') || element.classList.contains('water');
+    
+            // Move the object with layer effect, preserving flip state, and excluding background/water elements
+            if (isFlipped && !hasBackgroundOrWaterClass) {
+                element.style.transform = `translate(${vhOffsetX}vh, ${vhOffsetY}vh) scaleY(-1) translate(-50%, -50%)`;
+            } else if (!hasBackgroundOrWaterClass) {
+                element.style.transform = `translate(${vhOffsetX}vh, ${vhOffsetY}vh) translate(-50%, -50%)`;
+            } else {
+                element.style.transform = `translate(${vhOffsetX}vh, ${vhOffsetY}vh)`;
+            }
+        });
     });
 });
 
@@ -90,10 +97,10 @@ function changeImagesByParameter(timeOfDay) {
 
     // Define different scales for the .people element based on the current image
     const peopleScales = [
-        { width: '70vh', height: '80vh', top: '10vh', left: '70vh' },  // Dawn
-        { width: '60vh', height: '80vh', top: '10vh', left: '80vh' },  // Day
-        { width: '55vh', height: '80vh', top: '10vh', left: '82.5vh' },// Dusk
-        { width: '50vh', height: '80vh', top: '10vh', left: '82.5vh' } // Night
+        { width: '75vh', height: '80vh', top: '50vh', left: '50vw' },  // Dawn
+        { width: '60vh', height: '80vh', top: '50vh', left: '50vw' },  // Day
+        { width: '55vh', height: '80vh', top: '50vh', left: '50vw' },// Dusk
+        { width: '50vh', height: '80vh', top: '50vh', left: '50vw' } // Night
     ];
 
     // Map timeOfDay to an index
@@ -168,7 +175,7 @@ function changeImagesByParameter(timeOfDay) {
 
 
 
-changeImagesByParameter('dawn');
+changeImagesByParameter("dawn");
 const timePeriods = ['dawn', 'day', 'dusk', 'night'];
 function cycleThroughTimes(index) {
     if (index >= timePeriods.length) index = 0; 
@@ -177,7 +184,6 @@ function cycleThroughTimes(index) {
 
     setTimeout(() => {
         cycleThroughTimes(index + 1); 
-    }, 10000);
+    }, 3000);
 }
-// Start the cycling process
-cycleThroughTimes(0); 
+cycleThroughTimes(0);
