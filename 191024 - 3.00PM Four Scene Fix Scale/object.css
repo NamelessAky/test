@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.background {
+    position: absolute;
+    top: -2.5vh;
+    left: -2.5vh;
+    height: 105vh;
+    width: 105vw;
+    background-image: url("Milthm-dawn-airemove.jpg");
+    background-size: cover;
+    background-position: center;
+    z-index: -999;
+}
+
+/* Both background layers should be positioned absolutely */
+.background-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0; /* Initially hidden */
+    transition: opacity 1s ease-in-out; /* Smooth fade transition */
+}
+
+.background-layer-1 {
+    opacity: 1; /* Initial visible background */
+}
+
+.background-layer-2 {
+    opacity: 0; /* Hidden background */
+}
+
+.background .water {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-image: url("Milthm-dawn-airemove-ripper.png");
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    filter: url("#turbulence");
+}
+
+.water-layer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    opacity: 1; /* Initially hidden */
+    transition: opacity 1s ease-in-out;
+    z-index: -800;
+}
+
+.water-layer-1 {
+    opacity: 1; /* Initial visible water */
+}
+
+.water-layer-2 {
+    opacity: 0; /* Hidden water */
+}
+
+
+
+.reflect {
+    position: relative; 
+}
+
+.reflection {
+    position: relative; 
+    transform: scaleY(-1); 
+}
+
+.people {
+    width: 75vh; 
+    height: 80vh; 
+    background-image: url(people-airemove-dawn.png);
+    background-size: cover;
+    background-position: center;
+    top: 50vh; 
+    left: 50vw;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, opacity 0.7s ease-in-out;
+    opacity: 1;
+    z-index: 100;
+}
+
+.bird {
+    width: 266.67vh; 
+    height: 150vh; 
+    background-image: url(bird-airemove-day.png);
+    background-size: cover;
+    background-position: center;
+    filter: blur(0.5vh);
+    top: -46vh; 
+    left: 48vw;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s, opacity 1s ease-in-out;
+    opacity: 1;
+    z-index: 300;
+}
+
+.hidden {
+    opacity: 0; 
+}

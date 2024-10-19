@@ -7,12 +7,13 @@
 body, html {
     height: 100%;
     font-family: Arial, sans-serif;
+    overflow: hidden;
 }
 
 .background {
     position: absolute;
-    top: -5vh;
-    left: -5vh;
+    top: -2.5vh;
+    left: -2.5vh;
     height: 105vh;
     width: 105vw;
     background-image: url("Milthm-dawn-airemove.jpg");
@@ -102,8 +103,8 @@ body, html {
 }
 
 .bird {
-    width: 105vw; 
-    height: 125vh; 
+    width: 266.67vh; 
+    height: 150vh; 
     background-image: url(bird-airemove-day.png);
     background-size: cover;
     background-position: center;
