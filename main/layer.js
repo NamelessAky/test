@@ -90,12 +90,11 @@ function changeImagesByParameter(timeOfDay) {
 
     // Define different scales for the .people element based on the current image
     const peopleScales = [
-        { width: '124.44vw', height: '80vh', top: '10vh', left: '124.44vw' },  // Dawn
-        { width: '106.67vw', height: '80vh', top: '10vh', left: '142.22vw' },  // Day
-        { width: '97.78vw', height: '80vh', top: '10vh', left: '146.67vw' },   // Dusk
-        { width: '88.89vw', height: '80vh', top: '10vh', left: '146.67vw' }    // Night
+        { width: '70vh', height: '80vh', top: '10vh', left: '70vh' },  // Dawn
+        { width: '60vh', height: '80vh', top: '10vh', left: '80vh' },  // Day
+        { width: '55vh', height: '80vh', top: '10vh', left: '82.5vh' },// Dusk
+        { width: '50vh', height: '80vh', top: '10vh', left: '82.5vh' } // Night
     ];
-    
 
     // Map timeOfDay to an index
     const timeMapping = { dawn: 0, day: 1, dusk: 2, night: 3 };
